@@ -20,7 +20,7 @@ class Image(models.Model):
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     tags = models.ManyToManyField(tags)
-    article_image = models.ImageField(upload_to = 'articles/')
+    article_image = models.ImageField(upload_to = 'images/')
 
 
     def __str__(self):
