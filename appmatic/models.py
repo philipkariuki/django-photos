@@ -16,15 +16,24 @@ class tags(models.Model):
         
 class Image(models.Model):
     name = models.CharField(max_length =25)
-    description = models.TextField(max_length =35)
+    description = models.TextField(max_length =850)
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     tags = models.ManyToManyField(tags)
     article_image = models.ImageField(upload_to = 'images/')
+    pub_date = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
-        return self.title
+        return self.name
+
+
+
+    @classmethod
+    def new_images(cls):
+        today = dt.date.today()
+        photoz = cls.objects.filter(pub_date__date = today)
+        return photoz
 
 
     @classmethod

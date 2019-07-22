@@ -1,0 +1,123 @@
+{%extends 'mainz/base.html'%}
+
+{% block content %}
+{{block.super}}
+
+
+<main class="mt-5">
+  <div class="container">
+
+    <!--Section: Best Features-->
+          <section id="best-features" class="text-center">
+
+              <!-- Heading -->
+              <h2 class="mb-5 font-weight-bold">Sheer viewing pleasure</h2>
+
+              <!--Grid row-->
+              <div class="row d-flex justify-content-center mb-4">
+
+                  <!--Grid column-->
+                  <div class="col-md-8">
+
+                      <!-- Description -->
+                      <p class="grey-text">Yes, we ain't bluffing and you know it too. Only the best of the best. Creme de la creme hombre. When it comes to photos, no one does it better than us.</p>
+
+                  </div>
+                  <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+
+              <!--Grid row-->
+              <div class="row">
+
+                  <!--Grid column-->
+                  <div class="col-md-4 mb-5">
+                      <i class="fa fa-camera-retro fa-4x orange-text"></i>
+                      <h4 class="my-4 font-weight-bold">DSLR</h4>
+                      <p class="grey-text">Here you will find only true HD pictures taken by the most powerful DSLR in the local market. Say bye bye to pixelation and blurry pictures.</p>
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-md-4 mb-1">
+                      <i class="fa fa-heart fa-4x orange-text"></i>
+                      <h4 class="my-4 font-weight-bold">Lovely Photos</h4>
+                      <p class="grey-text">You are guaranteed to fall in love with each and every of our pictures, that you are.</p>
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-md-4 mb-1">
+                      <i class="fa fa-bus fa-4x orange-text"></i>
+                      <h4 class="my-4 font-weight-bold">Adventure</h4>
+                      <p class="grey-text">Set out on an adventure in this visual tour as your imagination is the limit.</p>
+                  </div>
+                  <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+
+          </section>
+          <!--Section: Best Features-->
+
+    <!-- Looping through news   -->
+    {% for img in photoz %}
+
+
+    <section id="examples" class="text-center">
+      <div class="row">
+
+        <div class="col-lg-9 col-md-9 mb-4">
+                          <h4 class="my-4 font-weight-bold"> {{ img.name }} </h4>
+                          <div class="view overlay z-depth-1-half">
+                                <a href=" http://127.0.0.1:8000{{img.article_image.url}} " data-toggle="lightbox" data-title="{{ img.name }}" data-footer=" Taken at : {{ img.location }}" >
+                                    <img src=" {{img.article_image.url}} " class="img-fluid" alt="Image">
+                                </a>
+                          </div>
+
+                          <h4 class="my-4 font-weight-bold"></h4>
+                          <p class="grey-text"> Description : {{ img.description }} </p>
+                          <p class="grey-text"><button type="button" class="btn btn-light-blue">Category :  </button> {{ img.category }} </p>
+                          
+
+                          
+
+        </div>
+        <div class="col-lg-3 col-md-3" style="margin-top: 275px;">
+          <i class="far fa-clipboard fa-2x orange-text"></i>
+          <!-- The button used to copy the text -->
+                          <button type="button" class="btn btn-orange" onclick="setClipboard('https://phillmatic.herokuapp.com{{img.article_image.url}}')">Copy Image URL</button>
+        </div>
+
+
+      
+
+
+      </div>
+      <hr class="my-5">
+    </section>
+
+    {% empty %}
+    <div class="row">
+      <h2 class="text-center">There No Images to display.</h2>
+    </div>
+    {% endfor %}
+
+  </div>
+</main>
+
+<script type="text/javascript">
+     function setClipboard(value) {
+            var tempInput = document.createElement("input");
+            tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+            tempInput.value = value;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Image link copied: " + tempInput.value);
+        }
+</script>
+
+{% endblock %}

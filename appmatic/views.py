@@ -7,7 +7,8 @@ from .models import Image
 
 def home_image(request):
     date = dt.date.today()
-    return render(request, 'mainz/content.html', {"date": date})
+    photoz = Image.new_images()
+    return render(request, 'mainz/content2.html', {"date": date,"photoz":photoz})
 
 
 
