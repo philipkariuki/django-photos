@@ -33,3 +33,30 @@ class Image(models.Model):
         return photos
 
 
+
+
+class Location(models.Model):
+    location_name = models.CharField(max_length =30)
+    
+    def __str__(self):
+        return self.location_name
+
+    def save_editor(self):
+        self.save()
+
+    class Meta:
+        ordering = ['location_name']
+
+class Category(models.Model):
+    category_name = models.CharField(max_length =30)
+    
+    def __str__(self):
+        return self.category_name
+
+    def save_editor(self):
+        self.save()
+
+    class Meta:
+        ordering = ['category_name']
+
+
