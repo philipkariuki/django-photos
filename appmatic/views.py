@@ -7,19 +7,9 @@ import datetime as dt
 def welcome(request):
     return render(request, 'hey.html')
 
-def news_of_day(request):
+def news_today(request):
     date = dt.date.today()
-    
-    # FUNCTION TO CONVERT DATE OBJECT TO FIND EXACT DAY
-    day = convert_dates(date)
-    html = f'''
-        <html>
-            <body>
-                <h1> News for {day} {date.day}-{date.month}-{date.year}</h1>
-            </body>
-        </html>
-            '''
-    return HttpResponse(html)
+    return render(request, 'mainz/content.html', {"date": date})
 
 def convert_dates(dates):
 
