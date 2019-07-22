@@ -1,42 +1,36 @@
 from django.shortcuts import render
-from django.http  import HttpResponse,Http404
+from django.http  import HttpResponse, Http404
 import datetime as dt
-
+from .models import Image
 
 # Create your views here.
-def welcome(request):
-    return render(request, 'hey.html')
 
-def news_today(request):
+def home_image(request):
     date = dt.date.today()
     return render(request, 'mainz/content.html', {"date": date})
 
-def convert_dates(dates):
 
-    # Function that gets the weekday number for the date.
-    day_number = dt.date.weekday(dates)
 
-    days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
 
-    # Returning the actual day of the week
-    day = days[day_number]
-    return day
 
-def past_days_news(request,past_date):
-    
+def search_results(request):
+
+    if 'image' in request.GET and request.GET["image"]:
+        search_term = request.GET.get("image")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'mainz/search.html',{"message":message,"images": searched_images})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'mainz/search.html',{"message":message})
+
+def image(request,image_id):
     try:
-        # Converts data from the string Url
-        date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
-    except ValueError:
-        # Raise 404 error when ValueError is thrown
+        image = Image.objects.get(id = image_id)
+    except DoesNotExist:
         raise Http404()
+    return render(request,"mainz/image.html", {"image":image})
 
-    day = convert_dates(date)
-    html = f'''
-        <html>
-            <body>
-                <h1>News for {day} {date.day}-{date.month}-{date.year}</h1>
-            </body>
-        </html>
-            '''
-    return HttpResponse(html)
+
