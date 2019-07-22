@@ -31,14 +31,13 @@ class Image(models.Model):
 
     @classmethod
     def new_images(cls):
-        today = dt.date.today()
-        photoz = cls.objects.filter(pub_date__date = today)
+        photoz = Image.objects.all()
         return photoz
 
 
     @classmethod
-    def search_by_title(cls,search_term):
-        photos = cls.objects.filter(title__icontains=search_term)
+    def search_by_category(cls,search_term):
+        photos = cls.objects.filter(category__category_name__icontains=search_term)
         return photos
 
 
@@ -50,7 +49,7 @@ class Location(models.Model):
     def __str__(self):
         return self.location_name
 
-    def save_editor(self):
+    def save_location(self):
         self.save()
 
     class Meta:
@@ -62,7 +61,7 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
-    def save_editor(self):
+    def save_category(self):
         self.save()
 
     class Meta:
