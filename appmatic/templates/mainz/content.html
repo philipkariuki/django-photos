@@ -61,7 +61,7 @@
           </section>
           <!--Section: Best Features-->
 
-    <!-- Looping through news   -->
+    <!-- Looping through photos   -->
     {% for img in photoz %}
 
 
@@ -71,7 +71,7 @@
         <div class="col-lg-9 col-md-9 mb-4">
           <h4 class="my-4 font-weight-bold"> {{ img.name }} </h4>
           <div class="view overlay z-depth-1-half">
-                <a href=" http://127.0.0.1:8000{{img.article_image.url}} " data-toggle="lightbox" data-title="{{ img.name }}" data-footer=" Taken at : {{ img.location }}" >
+                <a href=" https://phillmatic.herokuapp.com{{img.article_image.url}} " data-toggle="lightbox" data-title="{{ img.name }}" data-footer=" Taken at : {{ img.location }}" >
                     <img src=" {{img.article_image.url}} " class="img-fluid" alt="Image">
                 </a>
           </div>
